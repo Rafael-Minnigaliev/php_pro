@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <section class="content">
+        <div>
+            <header>
+                <h1 class="title">Галерея!</h1>
+            </header>
+            <section>
+                <section class="images">
+                {% for item in data %}
+                        <a href="fullimg.php?img={{ item.photo }}&id={{ item.id }}&action=edit"><img class="img_s" src="public/images/small/{{ item.photo }}" alt="photo"></a>
+                {% endfor %}
+                </section>
+                <form action="engine/server.php?action=add" method="post" enctype="multipart/form-data">
+                    <h3>Выберите изображение:</h3>
+                    <input style="margin: 5px 0; background: #63e2ff; border-radius: 4px; width: 188px;"
+                           type="file" name="photo[]" multiple accept="image/*"><br>
+                    <input type="submit" value="Загрузить">
+                </form>
+            </section>
+        </div>
+    </section>
+    <footer class="footer">
+        <p>&copy; Все права защищены! <?= date("Y")?></p>
+    </footer>
+</body>
+</html>
