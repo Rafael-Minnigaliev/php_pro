@@ -1,0 +1,21 @@
+<div id="statusUp" user="{{ userId }}">
+</div>
+<a class="Order" href="index.php?c=user&act=Profile">Вернуться назад</a>
+
+<script>
+    function show() {
+        let id = $('#statusUp').attr('user');
+        $.ajax({
+            url: "../model/MStatusUpdate.php?id="+id,
+            cache: false,
+            success: function(html){
+                $("#statusUp").html(html);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        show();
+        setInterval('show()',60000);
+    });
+</script>
