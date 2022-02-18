@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <script src="public/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<section class="content center" id="catalog__list">
+    <ul class="catalog">
+        {% for item in data %}
+            <li class="catalog__item">
+                <img height="200" src="public/images/goods/{{ item.img }}" alt="photo">
+                <div class="catalog__info">
+                    <p class="catalog__link">Название товара: {{ item.name }}</p>
+                    <p class="catalog__price">Цена: {{ item.price }}руб.</p>
+                    <p>Краткая информация: {{ item.info }}</p>
+                    <button class="catalog__btn">Добавить в корзину</button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <button page="1" max_page="{{ max_page }}" limit="{{ limit }}" style="margin: 0 auto; padding: 5px 10px" id="showmore-button">Показать ещё</button>
+</section>
+</body>
+</html>
