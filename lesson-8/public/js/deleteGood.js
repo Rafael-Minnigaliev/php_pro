@@ -1,9 +1,9 @@
 function deleteGood(id){
     $.ajax({
-        url: "../model/MDeleteGood.php",
+        url: "index.php?c=catalog&act=DeleteGood&ajax=1",
         type: "POST",
         data: { id },
-        success: function(data){
+        success: function(){
             $('#'+id).detach();
         }
     });

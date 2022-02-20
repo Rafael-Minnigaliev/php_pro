@@ -1,6 +1,6 @@
 function addToCart(gId, id){
     $.ajax({
-        url: "../model/MAddToCart.php",
+        url: "index.php?c=cart&act=AddToCart&ajax=1",
         type: "POST",
         data: { gId, id },
         success: function(data){
@@ -12,7 +12,7 @@ function addToCart(gId, id){
 
 function deleteFromCart(id){
     $.ajax({
-        url: "../model/MDeleteFromCart.php",
+        url: "index.php?c=cart&act=DeleteFromCart&ajax=1",
         type: "POST",
         data: { id },
         success: function(data){
@@ -35,13 +35,13 @@ function deleteFromCart(id){
 function changeCountFromCart(id){
     let val = document.querySelector('#count_'+id).value;
     $.ajax({
-        url: "../model/MChangeCountFromCart.php",
+        url: "index.php?c=cart&act=ChangeCountFromCart&ajax=1",
         type: "POST",
         data: { id, val },
         success: function(data){
             let array = data.split(" ");
-            $('#cart__price').empty();
-            $('#cart__price').append(array[0]);
+            $('#cart__price_'+id).empty();
+            $('#cart__price_'+id).append(array[0]);
             $('#pay__price').empty();
             $('#pay__price').append(array[1]);
             $('#cart__id').empty();

@@ -2,7 +2,6 @@
 session_start();
 require_once 'autoload.php';
 
-
 $action = 'action';
 $action .= isset($_GET['act']) ? $_GET['act'] : 'Index';
 
@@ -26,4 +25,11 @@ switch ($_GET['c']){
         $controller = new CPage();
 }
 
-$controller->Request($action);
+if((int)$_GET['ajax'] == 1){
+    $controller->ajaxRequest($action);
+}else{
+    $controller->Request($action);
+}
+
+
+

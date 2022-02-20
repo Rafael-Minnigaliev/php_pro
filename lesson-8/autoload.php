@@ -11,9 +11,7 @@ function autoLoadClassName($className){
         'controller',
         ''
     ];
-
     $found = false;
-
     foreach ($directories as $dir){
         $file = __DIR__.'/'.$dir.'/'.$className.'.php';
         if(is_file($file)){
@@ -22,10 +20,8 @@ function autoLoadClassName($className){
             break;
         }
     }
-
     if(!$found){
         throw new Exception("Unable to load: ".$className);
     }
-
     return true;
 }

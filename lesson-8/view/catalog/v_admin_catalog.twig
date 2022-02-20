@@ -1,25 +1,33 @@
 <div style="display: flex">
-    <form class="good_form" action="engine/server.php?action=addGood" method="post" enctype="multipart/form-data">
-        <h1 class="good_form__item">Загрузить новый товар</h1>
+    <form class="good_form" action="index.php?c=catalog&act=AddGood" method="post" enctype="multipart/form-data">
+        <h1 class="good_form__item">Добавить новый товар</h1>
         <label>Название: <input class="good_form__item" type="text" name="goodName" required></label><br>
         <label>Цена: <input class="good_form__item good_form__item_price" type="number" name="goodPrice" required></label><br>
         <label>Краткое описание: <input class="good_form__item" type="text" name="goodInfo" required></label><br>
+        Пол:
+        <select class="good_form__item" name="genderId" required>
+            <option value="none" selected>Пол</option>
+            <option value="1">Женский</option>
+            <option value="2">Мужской</option>
+            <option value="3">Унисекс</option>
+        </select><br>
+        Категория:
+        <select class="good_form__item" name="goodCategoryId" required>
+            <option value="none" selected>Категория</option>
+            <option value="1">Одежда</option>
+            <option value="2">Аксессуары</option>
+            <option value="3">Обувь</option>
+            <option value="4">Рюкзаки и сумки</option>
+        </select>
         <p>Описание: </p>
         <textarea class="good_form__item" name="goodFullInfo" cols="60" rows="10" required></textarea><br>
         <input class="good_form__item" type="file" name="photo" accept="image/*"><br>
-        <input class="good_form__item" type="submit" value="Загрузить">
+        <input class="good_form__item" type="submit" value="Добавить">
     </form>
-    {% if status %}
-    <h1>Товар успешно загружен!</h1>
-    <?php
-        elseif((int)$_GET['status'] == 2 || (int)$_GET['changeStatus'] == 2 || (int)$_GET['delStatus'] == 2):?>
-    <h1>Что то пошло не так, попробуйте снова!</h1>
-    <?php
-        elseif((int)$_GET['changeStatus'] == 1):?>
-    <h1>Товар успешно изменен!</h1>
-    <?php
-        elseif((int)$_GET['delStatus'] == 1):?>
-    <h1>Товар успешно удален!</h1>
+    {% if status == 1 %}
+    <h2>Товар успешно добавлен</h2>
+    {% elseif status == 2 %}
+    <h2>Что-то пошло не так, попробуйте загрузить снова.</h2>
     {% endif %}
 </div>
 
@@ -49,22 +57,11 @@
 {% endif %}
 <ul class="catalog" id="catalog__list">
     {% for item in data %}
-    <li class="catalog__item" id="{{ item.id }}">
-        <img height="230" src="public/images/goods/{{ item.img }}" alt="photo">
-        <div class="catalog__info">
-            <p class="catalog__link">Название товара:&nbsp; {{ item.name }}</p>
-            <p class="catalog__price">Цена:&nbsp; {{ item.price }}руб.</p>
-            <p>Краткая информация:&nbsp; {{ item.info }}</p>
-            <p class="catalog__gender">Пол:&nbsp; {{ item.gen_name }}</p>
-            <p>Категория:&nbsp; {{ item.good_cat_name }}</p>
-            <button onclick="changeForm({{ item.id }})" style="margin: 10px 0">Изменить</button><br>
-            <button onclick="deleteGood({{ item.id }})">Удалить</button>
-        </div>
-    </li>
+        {% include 'catalog/v_goods_card.twig' %}
     {% endfor %}
 </ul>
 {% if maxPage > 1 %}
-<button page="1" max_page="{{ maxPage }}" gcat="{{ gCat }}" gen="{{ gen }}" uid="{{ uid }}" sid="{{ sid }}" admin="1" class="catalog__show_btn" id="showmore-button">Показать ещё</button>
+<button page="1" max_page="{{ maxPage }}" gcat="{{ gCat }}" gen="{{ gen }}" uid="{{ id }}" admin="1" class="catalog__show_btn" id="showmore-button">Показать ещё</button>
 {% endif %}
 <script src="public/js/showMoreGoods.js"></script>
 <script src="public/js/deleteGood.js"></script>

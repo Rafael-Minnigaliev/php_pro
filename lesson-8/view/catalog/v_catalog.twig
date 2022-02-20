@@ -23,28 +23,10 @@
 <h3>Извините, на данный момент нет товаров удовлетворяющих данным критериям.</h3>
 {% endif %}
 <ul class="catalog" id="catalog__list">
-    {% for item in data %}
-    <li class="catalog__item">
-        <a href="index.php?c=catalog&act=GetGoodInfo&id={{ item.id }}"><img height="230" src="public/images/goods/{{ item.img }}" alt="photo"></a>
-        <div class="catalog__info">
-            <a class="catalog__link" href="index.php?c=catalog&act=GetGoodInfo&id={{ item.id }}"><p>Название товара:&nbsp; {{ item.name }}</p></a>
-            <p class="catalog__price">Цена:&nbsp; {{ item.price }}руб.</p>
-            <p>Краткая информация:&nbsp; {{ item.info }}</p>
-            <p class="catalog__gender">Пол:&nbsp; {{ item.gen_name }}</p>
-            <p>Категория:&nbsp; {{ item.good_cat_name }}</p>
-            {% if not admin %}
-                {% if uid %}
-                    <button onclick="addToCart({{ item.id }}, {{ uid }})" class="catalog__btn">Добавить вкорзину</button>
-                {% else %}
-                    <button onclick="addToCart({{ item.id }}, '{{ sid }}')" class="catalog__btn">Добавить вкорзину</button>
-                {% endif %}
-            {% endif %}
-        </div>
-    </li>
-    {% endfor %}
+    {% include 'catalog/v_goods_card.twig' %}
 </ul>
 {% if maxPage > 1 %}
-<button page="1" max_page="{{ maxPage }}" gcat="{{ gCat }}" gen="{{ gen }}" uid="{{ uid }}" sid="{{ sid }}" class="catalog__show_btn" id="showmore-button">Показать ещё</button>
+<button page="1" max_page="{{ maxPage }}" gcat="{{ gCat }}" gen="{{ gen }}" uid="{{ id }}" admin="" class="catalog__show_btn" id="showmore-button">Показать ещё</button>
 {% endif %}
 <script src="public/js/showMoreGoods.js"></script>
 <script src="public/js/cart.js"></script>

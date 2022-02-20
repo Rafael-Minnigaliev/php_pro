@@ -24,10 +24,9 @@ class CUser extends CBase{
                 $login = $_POST['login'] ? strip_tags($_POST['login']) : "";
                 $pass = $_POST['pass'] ? strip_tags($_POST['pass']) : "";
                 MLogin::login($login, $pass);
-            }else{
-                $this->title = "Авторизация";
-                $this->content = $this->template("v_login.twig", array('status' => $_GET['status']));
             }
+            $this->title = "Авторизация";
+            $this->content = $this->template("v_login.twig", array('status' => $_GET['status']));
         } else {
             header("Location: index.php");
         }

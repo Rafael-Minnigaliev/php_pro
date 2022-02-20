@@ -45,4 +45,45 @@ class MCatalog{
                             FROM goods JOIN category ON category_id = category.id JOIN gender_category ON gender_category_id = gender_category.id 
                             JOIN goods_category ON goods_category_id = goods_category.id WHERE goods.id = :id", ['id' => $id]);
     }
+
+    public static function addGood($name, $price, $info, $genId, $goodCatId, $fullInfo, $photo){
+        if ($photo){
+            $catId = DB::getRow("SELECT id FROM category WHERE gender_category_id = :genid AND goods_category_id = :goodid", ['genid' => $genId, 'goodid' => $goodCatId]);
+            DB::insert("INSERT INTO goods(name, img, price, info, full_info, category_id) VALUES(:name, :photo, :price, :info, :finfo, :cid)", ['name' => $name, 'photo' => $photo, 'price' => $price, 'info' => $info, 'finfo' => $fullInfo, 'cid' => $catId['id']]);
+            move_uploaded_file("{$_FILES['photo']['tmp_name']}", "public/images/goods/$photo");
+            header("Location: index.php?c=catalog&status=1");
+        }else{
+            header("Location: index.php?c=catalog&status=2");
+        }
+    }
+
+    public static function changeGood($id, $name, $price, $info, $genId, $goodCatId, $fullInfo, $photoCheck, $photo){
+        if(!$photoCheck){
+//          $img = DB::getRow("SELECT img FROM goods WHERE id = :id", ['id' => $id]);
+//          if(file_exists("../public/images/goods/{$img['img']}")){
+//              unlink("../public/images/goods/{$img['img']}");
+//          }  //Удаление файлов изображений товаров. Отключено т.к. на данный момент многие товары выводять одно и то же изображение!
+            $catId = DB::getRow("SELECT id FROM category WHERE gender_category_id = :genid AND goods_category_id = :goodid", ['genid' => $genId, 'goodid' => $goodCatId]);
+            DB::update("UPDATE goods SET name = :name, img = :photo, price = :price, info = :info, full_info = :finfo, category_id = :cid WHERE id = :id",
+                ['name' => $name, 'photo' => $photo, 'price' => $price, 'info' => $info, 'finfo' => $fullInfo, 'cid' => $catId['id'], 'id' => $id]);
+            move_uploaded_file("{$_FILES['photo']['tmp_name']}", "{$_SERVER['DOCUMENT_ROOT']}/public/images/goods/$photo");
+            return self::getGoodInfo($id);
+        }else{
+            $catId = DB::getRow("SELECT id FROM category WHERE gender_category_id = :genid AND goods_category_id = :goodid", ['genid' => $genId, 'goodid' => $goodCatId]);
+            DB::update("UPDATE goods SET name = :name, price = :price, info = :info, full_info = :finfo, category_id = :cid WHERE id = :id",
+                ['name' => $name, 'price' => $price, 'info' => $info, 'finfo' => $fullInfo, 'cid' => $catId['id'], 'id' => $id]);
+            return self::getGoodInfo($id);
+        }
+    }
+
+    public static function deleteGood($id){
+        //$img = DB::getRow("SELECT img FROM goods WHERE id = :id", ['id' => $id]);
+        //if(file_exists("../public/images/goods/{$img['img']}")){
+            //unlink("../public/images/goods/{$img['img']}");
+        //}  //Удаление файлов изображений товаров. Отключено т.к. на данный момент многие товары выводять одно и то же изображение!
+        DB::delete("DELETE FROM goods WHERE id = :id", ['id' => $id]);
+    }
 }
+
+
+

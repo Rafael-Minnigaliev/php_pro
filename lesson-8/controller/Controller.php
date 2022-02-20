@@ -3,8 +3,12 @@ abstract class Controller{
     abstract function render();
 
     public function Request($action){
+       $this->$action();
+       $this->render();
+    }
+
+    public function ajaxRequest($action){
         $this->$action();
-        $this->render();
     }
 
     protected function template($fileName, $data = array()){

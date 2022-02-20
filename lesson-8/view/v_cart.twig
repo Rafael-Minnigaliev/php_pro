@@ -6,7 +6,7 @@
             <a href="index.php?c=catalog&act=GetGoodInfo&id={{ item.goods_id }}"><img height="210" src="public/images/goods/{{ item.img }}" alt="photo"></a>
             <div class="cart__info">
                 <a class="cart__link" href="index.php?c=catalog&act=GetGoodInfo&id={{ item.goods_id }}"><p>Название товара:&nbsp; {{ item.name }}</p></a>
-                <p class="cart__price">Цена: <span id="cart__price">{{ item.price * item.count }}</span>руб.</p>
+                <p class="cart__price">Цена: <span id="cart__price_{{ item.id }}">{{ item.price * item.count }}</span>руб.</p>
                 <p class="cart__gender">Пол:&nbsp; {{ item.gen_name }}</p>
                 <p>Категория:&nbsp; {{ item.good_cat_name }}</p>
                 <p class="cart__count">Количество: <input id="count_{{ item.id }}" onchange="changeCountFromCart({{ item.id }})" min="1" max="10" style="width: 40px; padding-left: 10px" type="number" value="{{ item.count }}"></p>

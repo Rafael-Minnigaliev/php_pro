@@ -7,8 +7,8 @@ class COrder extends CBase {
                 $userInfo = MOrder::getOrderUserInfo($_SESSION['user_id']);
             }
             $deliveryDate = date('d.m.Y', strtotime("+2 day"));
-            $orderInfo = MOrder::getOrderRegInfo();
-            $totalPrice = MOrder::getOrderTotalPrice();
+            $orderInfo = MOrder::getOrderRegInfo($_SESSION['user_id']);
+            $totalPrice = MOrder::getOrderTotalPrice($_SESSION['user_id']);
             $this->content = $this->template("order/v_order_reg.twig", ['userId' => $_SESSION['user_id'], 'orderInfo' => $orderInfo, 'userInfo' => $userInfo, 'totalPrice' => $totalPrice, 'deliveryDate' => $deliveryDate]);
         }else{
             header("Location: index.php");
@@ -27,9 +27,10 @@ class COrder extends CBase {
 
     protected function actionOrderInfo(){
         if ($_SESSION['user_id'] && !$_SESSION['role']){
-            $this->title = "Информация о заказе №{$_GET['id']}";
-            $data =MOrder::getOrderInfo($_GET['id']);
-            $price = MOrder::getOrderPrice($_GET['id']);
+            $orderID = (int)$_GET['id'];
+            $this->title = "Информация о заказе №$orderID";
+            $data =MOrder::getOrderInfo($orderID);
+            $price = MOrder::getOrderPrice($orderID);
             $this->content = $this->template("order/v_order_info.twig", ['data' => $data, 'price' => $price]);
         }
         else{
@@ -40,7 +41,14 @@ class COrder extends CBase {
     protected function actionOrderRegistration(){
         if(!$_SESSION['role']){
             $this->title = "";
-            $orderId = MOrder::orderRegistration($_POST['payMethod']);
+            $var = true;
+            $id = session_id();
+            $sessId = $_SESSION['user_id'];
+            $name = $_POST['name'] ? strip_tags($_POST['name']) : "";
+            $tel = (int)$_POST['tel'];
+            $addr = $_POST['addr'] ? strip_tags($_POST['addr']) : "";
+            $payMethod = $_POST['payMethod'] ? strip_tags($_POST['payMethod']) : "";
+            $orderId = MOrder::orderRegistration($var, $id, $sessId, $name, $tel, $addr, $payMethod);
             $this->content = $this->template("order/v_order_reg.twig", ['orderId' => $orderId['id']]);
         }else{
             header("Location: index.php");
@@ -99,5 +107,17 @@ class COrder extends CBase {
         }else{
             header("Location: index.php");
         }
+    }
+
+    protected function actionСheckStatusUpdate(){
+        $id = (int)$_POST['id'];
+        echo  MOrder::сheckStatusUpdate($id);
+    }
+
+    protected function actionOrderRegChangeData(){
+        $tel = (int)$_POST['tel'];
+        $addr = $_POST['addr'] ? strip_tags($_POST['addr']) : "";
+        $id = (int)$_POST['userid'];
+        echo MOrder::orderRegChangeData($tel, $addr, $id);
     }
 }

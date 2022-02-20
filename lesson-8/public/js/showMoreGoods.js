@@ -4,13 +4,12 @@ $('#showmore-button').click(function (){
     let gcat = item.attr('gcat');
     let gen = item.attr('gen');
     let uid = item.attr('uid');
-    let sid = item.attr('sid');
     let admin = item.attr('admin');
     page++;
     $.ajax({
-        url: "../model/MshowMoreGoods.php",
+        url: "index.php?c=catalog&act=ShowMoreGoods&ajax=1",
         type: "POST",
-        data: { page, gcat, gen, uid, sid, admin },
+        data: { page, gcat, gen, uid, admin },
         success: function(data){
             $('#catalog__list').append(data);
         }

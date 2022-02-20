@@ -1,6 +1,6 @@
 function changeForm(id){
     $.ajax({
-        url: "../model/MChangeForm.php",
+        url: "index.php?c=catalog&act=GetChangeForm&ajax=1",
         type: "POST",
         data: { id },
         success: function(data){
@@ -15,14 +15,13 @@ $('#good_form').on('submit', function(e){
     let id = $(this).attr('goodId');
     $.ajax({
             method: 'POST',
-            url: '../model/MChangeGood.php',
+            url: 'index.php?c=catalog&act=ChangeGood&ajax=1',
             encType: 'multipart/form-data',
             data: new FormData(this),
             processData: false,
             contentType: false,
             success: function(data){
-                $('#'+id).empty();
-                $('#'+id).append(data);
+                $('#'+id).replaceWith(data);
             }
         }
     );
