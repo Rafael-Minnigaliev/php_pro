@@ -1,4 +1,5 @@
 <?php
+
 class CCart extends CBase{
     protected function actionIndex(){
         if (!$_SESSION['role']){

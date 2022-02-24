@@ -3,7 +3,7 @@
 <li class="catalog__item">
     <a href="index.php?c=catalog&act=GetGoodInfo&id={{ item.id }}>"><img height="230" src="public/images/goods/{{ item.img }}" alt="photo"></a>
     <div class="catalog__info">
-        <a class="catalog__link" href="index.php?c=catalog&act=GetGoodInfo&id={{ item.id }}"><p>Название товара:&nbsp; {{ item.name }}</p></a>
+        <a class="catalog__link" href="index.php?c=catalog&act=GetGoodInfo&id={{ item.id }}"><p>Название товара:{{ item.name }}</p></a>
         <p class="catalog__price">Цена:&nbsp; {{ item.price }}руб.</p>
         <p>Краткая информация:&nbsp; {{ item.info }}</p>
         <p class="catalog__gender">Пол:&nbsp; {{ item.gen_name }}</p>

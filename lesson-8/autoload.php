@@ -1,13 +1,11 @@
 <?php
-require_once 'lib/Twig/Autoloader.php';
-Twig_Autoloader::register();
+require_once 'lib/autoload.php';
 
 spl_autoload_register('autoLoadClassName');
 
 function autoLoadClassName($className){
     $directories = [
         'model',
-        'view',
         'controller',
         ''
     ];

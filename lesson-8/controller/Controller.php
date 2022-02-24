@@ -12,10 +12,11 @@ abstract class Controller{
     }
 
     protected function template($fileName, $data = array()){
-        $loader = new Twig_Loader_Filesystem("view");
-        $twig = new Twig_Environment($loader);
-        $template = $twig->loadTemplate($fileName);
-        return $template->render($data);
+        $loader = new \Twig\Loader\FilesystemLoader("view");
+        $twig = new \Twig\Environment($loader, [
+            'cache' => '/path/to/compilation_cache',
+        ]);
+        return $twig->render($fileName, $data);
     }
 
     protected function isMethod($method){

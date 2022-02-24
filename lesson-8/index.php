@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'autoload.php';
+require_once 'controller/CCart.php';
 
 $action = 'action';
 $action .= isset($_GET['act']) ? $_GET['act'] : 'Index';
