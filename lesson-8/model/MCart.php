@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael\Model;
+use MyProject\Rafael\DB;
+
 class MCart{
     public static function getCount($id, $sessID){
         if($id){

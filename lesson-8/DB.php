@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael;
+use PDO;
+
 class DB{
     const DB = 'mysql';
     const DB_HOST = 'localhost';

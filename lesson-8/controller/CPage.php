@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael\Controller;
+use MyProject\Rafael\Controller\CBase;
+
 class CPage extends CBase {
     protected function actionIndex(){
         $this->title = "Интернет магазин";

@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael\Model;
+use MyProject\Rafael\DB;
+
 class MOrder{
     public static function getOrderList($id){
        return DB::Select("SELECT orders.id, status, date FROM orders JOIN order_status ON order_status_id = order_status.id 

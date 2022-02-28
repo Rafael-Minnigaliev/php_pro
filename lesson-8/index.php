@@ -1,7 +1,13 @@
 <?php
 session_start();
 require_once 'autoload.php';
-require_once 'controller/CCart.php';
+
+use \MyProject\Rafael\Controller\CPage;
+use \MyProject\Rafael\Controller\CUser;
+use \MyProject\Rafael\Controller\COrder;
+use \MyProject\Rafael\Controller\CCatalog;
+use \MyProject\Rafael\Controller\CGood;
+use \MyProject\Rafael\Controller\CCart;
 
 $action = 'action';
 $action .= isset($_GET['act']) ? $_GET['act'] : 'Index';

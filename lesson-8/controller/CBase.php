@@ -1,4 +1,8 @@
 <?php
+namespace MyProject\Rafael\Controller;
+use MyProject\Rafael\Controller\Controller;
+use MyProject\Rafael\Model\MCart;
+
 class CBase extends Controller {
     protected $title;
     protected $content;

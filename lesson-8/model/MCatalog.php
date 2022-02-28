@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael\Model;
+use MyProject\Rafael\DB;
+
 class MCatalog{
     const SQL = "SELECT goods.id, goods.name, img, price, info, gender_category.name gen_name, goods_category.name good_cat_name 
                 FROM goods JOIN category ON category_id = category.id JOIN gender_category ON gender_category_id = gender_category.id 

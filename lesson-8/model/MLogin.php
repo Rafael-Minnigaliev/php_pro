@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael\Model;
+use MyProject\Rafael\DB;
+
 class MLogin{
     private static function getSecurePass($login, $pass){
         return strrev(md5($login)).md5($pass).strrev(md5($login));

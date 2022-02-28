@@ -1,4 +1,8 @@
 <?php
+namespace MyProject\Rafael\Controller;
+use MyProject\Rafael\Controller\CBase;
+use MyProject\Rafael\Model\MOrder;
+
 class COrder extends CBase {
     protected function actionIndex(){
         if (!$_SESSION['role']){

@@ -1,4 +1,10 @@
 <?php
+namespace MyProject\Rafael\Controller;
+use MyProject\Rafael\Controller\CBase;
+use MyProject\Rafael\Model\MProfile;
+use MyProject\Rafael\Model\MLogin;
+use MyProject\Rafael\Model\MReg;
+
 class CUser extends CBase{
     protected function actionProfile(){
         if ($_SESSION['user_id']) {

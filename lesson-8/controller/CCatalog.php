@@ -1,4 +1,8 @@
 <?php
+namespace MyProject\Rafael\Controller;
+use MyProject\Rafael\Controller\CBase;
+use MyProject\Rafael\Model\MCatalog;
+
 class CCatalog extends CBase {
     protected function actionIndex(){
         $this->title = "Каталог";

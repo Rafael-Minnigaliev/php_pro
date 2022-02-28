@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael\Controller;
+use MyProject\Rafael\Controller\CBase;
+use MyProject\Rafael\Model\MCart;
 
 class CCart extends CBase{
     protected function actionIndex(){

@@ -1,4 +1,6 @@
 <?php
+namespace MyProject\Rafael\Controller;
+
 abstract class Controller{
     abstract function render();
 

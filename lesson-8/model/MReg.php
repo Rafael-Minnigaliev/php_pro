@@ -1,4 +1,7 @@
 <?php
+namespace MyProject\Rafael\Model;
+use MyProject\Rafael\DB;
+
 class MReg{
     public static function reg($name, $login, $pass, $tel, $address){
         $sth1 = DB::getRow("SELECT login FROM users WHERE login = :login", ['login' => $login]);
